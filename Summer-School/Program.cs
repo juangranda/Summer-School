@@ -274,9 +274,27 @@ namespace SummerSchool
         static void PrintStudentList() //prints List of Students
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("LIST OF ENROLLED STUDENTS");
+            Console.ResetColor();
             for (int i = 0; i < Students.Length; i++)
             {
-                Console.WriteLine(i + 1 + ". " + Students[i] + " (£" + StudentFees[i] + ")");
+                if (Students[i] != null)
+                    if (StudentFees[i] < 200)
+                    {
+                        Console.WriteLine();
+                        //Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(i + 1 + ". " + Students[i] + " ");
+                        Console.Write("(£" + StudentFees[i] + ")");
+                        Console.ResetColor();
+                        Console.WriteLine();
+                    }
+                    else
+                {
+                        Console.WriteLine();
+                        Console.WriteLine(i + 1 + ". " + Students[i] + " (£" + StudentFees[i] + ")");
+                }
             }
             Console.WriteLine();
             Console.WriteLine("Total £" + FeesTotal());
