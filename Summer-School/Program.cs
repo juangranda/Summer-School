@@ -215,7 +215,7 @@ namespace SummerSchool
         } 
         static void Unenroll()  // unenroll a student
         {
-            if (!(StudentCount() < Students.Length))
+            if (StudentCount() > 0)
             {
                 Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll");
                 PrintStudentList();
