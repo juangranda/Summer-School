@@ -213,14 +213,23 @@ namespace SummerSchool
         } 
         static void Unenroll()  // unenroll a student
         {
-            Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll");
-            PrintStudentList();
-            int studentNumber = Convert.ToInt32(Console.ReadLine());
-            studentNumber = studentNumber - 1;
-            Console.WriteLine(Students[studentNumber] + " has been unenrolled");
-            Students[studentNumber] = null;
-            StudentFees[studentNumber] = 0;
-            Console.WriteLine("Press any key to get back to the Main Menu");
+            if (StudentCount() > 0)
+            {
+                Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll");
+                PrintStudentList();
+                int studentNumber = Convert.ToInt32(Console.ReadLine());
+                studentNumber = studentNumber - 1;
+                Console.WriteLine(Students[studentNumber] + " has been unenrolled");
+                Students[studentNumber] = null;
+                StudentFees[studentNumber] = 0;
+                Console.WriteLine("Press any key to get back to the Main Menu");
+            }
+            else
+            {
+                Console.WriteLine("\n*** Invalid Choice ***\n");
+                Console.WriteLine("Please select options from the menu. (Valid choices are 1, 3, 4)\n");
+                Console.WriteLine("Press any key to get back to the Main Menu");
+            }
         } 
         static char FirstLetterFirstName() //Pulls the first letter in name
         {
@@ -271,7 +280,8 @@ namespace SummerSchool
             }
             Console.WriteLine();
             Console.WriteLine("Total £" + FeesTotal());
-        } 
+            Console.WriteLine("\nPress any key to get back to the Main Menu");
+        }
         static double FeesTotal()//Gets Total
         {
             double totalFirst5 = StudentFees[0] + StudentFees[1] + StudentFees[2] + StudentFees[3] + StudentFees[4];
