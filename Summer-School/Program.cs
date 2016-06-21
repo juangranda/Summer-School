@@ -46,7 +46,7 @@ namespace SummerSchool
                 Console.WriteLine("ENTER A NUMBER THAT CORRESPONDS TO YOUR CHOICE IN THE MENU:\n");
                 MenuChoice = Console.ReadLine();
             }
-            else if (StudentCount() == 15)
+            else if (StudentCount() > 14)
             {
                 Console.Clear();
                 Console.WriteLine("MAIN MENU\n");
@@ -77,6 +77,11 @@ namespace SummerSchool
                 Console.WriteLine(" ");
                 Console.WriteLine("Please enter the name of the student you want to enroll\n");
                 string newStudent = Console.ReadLine();
+                string[] splitNames = newStudent.Split(' ');
+
+                string firstName = splitNames[0];
+                string lastName = splitNames[splitNames.Length - 1];
+
                 int spot = GetNextAvailableSpot();
                 if ((newStudent.ToLower()).Contains("malfoy"))
                 {
@@ -89,26 +94,26 @@ namespace SummerSchool
                 else if (newStudent.Contains("Potter"))
                 {
                     Students[spot] = newStudent;
-                    StudentFees[spot] = fee*0.5;
-                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee*0.5);
+                    StudentFees[spot] =  fee*0.5; //CalculateEnrollmentCost(newStudent);
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + (fee*0.5));
                     Console.WriteLine("\nPress any key to get back to the Main Menu");
                 }
          //Starts checking for Tom, Riddle, Voldemort and displaying Red Alert message
-                else if (newStudent.Contains("Tom"))
+                else if (lastName.ToLower() == "tom" || firstName.ToLower() == "tom")
                 {
                     Students[spot] = newStudent;
                     StudentFees[spot] = fee;
                     Console.WriteLine("RED ALERT!!! HE WHO MUST NOT BE NAMED!!!\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
-                else if (newStudent.Contains("Riddle"))
+                else if (lastName.ToLower() == "riddle" || firstName.ToLower() == "riddle")
                 {
                     Students[spot] = newStudent;
                     StudentFees[spot] = fee;
                     Console.WriteLine("RED ALERT!!! HE WHO MUST NOT BE NAMED!!!\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
-                else if (newStudent.Contains("Voldemort"))
+                else if (lastName.ToLower() == "voldemort" || firstName.ToLower() == "voldemort")
                 {
                     Students[spot] = newStudent;
                     StudentFees[spot] = fee;
@@ -118,10 +123,10 @@ namespace SummerSchool
           //Checks for Longbottom discount if less than 10 students are enrolled
                 else if ((newStudent.ToLower()).Contains("longbottom"))
                 {
-                    if (StudentCount() < 3)
+                    if (StudentCount() < 10)
                     {
                         Students[spot] = newStudent;
-                        StudentFees[spot] = fee * 0;
+                        StudentFees[spot] = fee *0;
                         Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + (fee * 0));
                         Console.WriteLine("Press any key to get back to the Main Menu");
                     }
@@ -184,18 +189,15 @@ namespace SummerSchool
                     Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
                     Console.WriteLine("\nPress any key to get back to the Main Menu");
                 }
-                //Should give 10% to students with a last name that starts with the same letter as their first name
-                //But it does'nt work
-                //All names end in this Else if
-                //else if (FirstLetterFirstName() == FisrtCharLastName())
-                //{
-                //    Students[spot] = newStudent;
-                //    StudentFees[spot] = fee*0.9;
-                //    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee*0.9);
-                //    Console.WriteLine("Press any key to get back to the Main Menu");
-
-                //}
-
+                //Checks for matching first letters in last name and first name.
+                else if (firstName.ToLower()[0] == lastName.ToLower()[0])
+                //else if (FirstLetterFirstName() == FisrtCharLastName()) // tried to use this method but didn't work
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.9;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.9);
+                    Console.WriteLine("Press any key to get back to the Main Menu");
+                }
 
                 else
                 {
@@ -213,7 +215,7 @@ namespace SummerSchool
         } 
         static void Unenroll()  // unenroll a student
         {
-            if (StudentCount() > 0)
+            if (!(StudentCount() < Students.Length))
             {
                 Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll");
                 PrintStudentList();
@@ -231,7 +233,7 @@ namespace SummerSchool
                 Console.WriteLine("Press any key to get back to the Main Menu");
             }
         } 
-        static char FirstLetterFirstName() //Pulls the first letter in name
+        static char FirstLetterFirstName() //Pulls the first letter in name //Not being used
         {
             char firstLetter = 'a';
             for (int i = 0; i < Students.Length; i++)
@@ -244,7 +246,7 @@ namespace SummerSchool
             }
             return firstLetter;
         }
-        static int SpaceIndex() //pulls index of "space" in a name
+        static int SpaceIndex() //pulls index of "space" in a name // Not being used
         {
             int space = 0;
             for (int i = 0; i < Students.Length; i++)
@@ -257,7 +259,7 @@ namespace SummerSchool
             }
             return space;
         }
-        static char FisrtCharLastName() // pulls first letter in last name
+        static char FisrtCharLastName() // pulls first letter in last name // Not being used
         {
             char firstLetterLastName = 'a';
             for (int i = 0; i < Students.Length; i++)
@@ -283,21 +285,21 @@ namespace SummerSchool
                     if (StudentFees[i] < 200)
                     {
                         Console.WriteLine();
-                        //Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(i + 1 + ". " + Students[i] + " ");
-                        Console.Write("(£" + StudentFees[i] + ")");
+                        Console.Write(i + 1 + ". " + Students[i] + " (£" + StudentFees[i] + ")");
                         Console.ResetColor();
                         Console.WriteLine();
                     }
-                    else
+                else
                 {
                         Console.WriteLine();
                         Console.WriteLine(i + 1 + ". " + Students[i] + " (£" + StudentFees[i] + ")");
                 }
             }
             Console.WriteLine();
-            Console.WriteLine("Total £" + FeesTotal());
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("Total: £" + FeesTotal());
+            Console.ResetColor();
             Console.WriteLine("\nPress any key to get back to the Main Menu");
         }
         static double FeesTotal()//Gets Total
@@ -327,13 +329,14 @@ namespace SummerSchool
                     PrintStudentList();
                 }
           
-        //Invalid menu choice
+                //Invalid menu choice message
                 else if (!(Choice == "1" || Choice == "2" || Choice == "3" || Choice == "4"))
                 {
                     Console.WriteLine("\n*** Invalid Choice ***\n");
                     Console.WriteLine("Please select options from the menu. (Valid choices are 1, 2, 3, 4)\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
+                //exit
                 else
                 {
                     Console.WriteLine("\nThank you for using the Enrollment System\n");
