@@ -275,7 +275,7 @@ namespace SummerSchool
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("LIST OF ENROLLED STUDENTS");
+            Console.WriteLine("ENROLLED STUDENTS");
             Console.ResetColor();
             for (int i = 0; i < Students.Length; i++)
             {
