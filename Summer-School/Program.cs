@@ -71,8 +71,6 @@ namespace SummerSchool
         } 
         static void Enroll() // enroll a student
         {
-            char flfn = FirstLetterFirstName();
-            char flln = FisrtCharLastName();
             if (StudentCount() < 15)
             {
                 double fee = 200;
@@ -87,14 +85,15 @@ namespace SummerSchool
                     Console.WriteLine("Students with the last name Malfoy are not to be admitted\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
+          //Checks for Last name Potter
                 else if (newStudent.Contains("Potter"))
                 {
                     Students[spot] = newStudent;
                     StudentFees[spot] = fee*0.5;
-                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee / 2);
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee*0.5);
                     Console.WriteLine("\nPress any key to get back to the Main Menu");
-
                 }
+         //Starts checking for Tom, Riddle, Voldemort and displaying Red Alert message
                 else if (newStudent.Contains("Tom"))
                 {
                     Students[spot] = newStudent;
@@ -116,6 +115,7 @@ namespace SummerSchool
                     Console.WriteLine("RED ALERT!!! HE WHO MUST NOT BE NAMED!!!\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
+          //Checks for Longbottom discount if less than 10 students are enrolled
                 else if ((newStudent.ToLower()).Contains("longbottom"))
                 {
                     if (StudentCount() < 3)
@@ -132,11 +132,61 @@ namespace SummerSchool
                         Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee);
                         Console.WriteLine("Press any key to get back to the Main Menu");
                     }
-                }
 
-        //Should give 10% to students with a last name that starts with the same letter as their first name
-        //But it does'nt work
-        //All names end in this Else if
+         // Starts checking for students with same last names as English National Quidditch Team
+                }
+                else if (newStudent.Contains("Frisby"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee*0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Choudry"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Withey"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Flitney"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Avery"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Vosper"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                else if (newStudent.Contains("Parkin"))
+                {
+                    Students[spot] = newStudent;
+                    StudentFees[spot] = fee * 0.7;
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
+                    Console.WriteLine("\nPress any key to get back to the Main Menu");
+                }
+                //Should give 10% to students with a last name that starts with the same letter as their first name
+                //But it does'nt work
+                //All names end in this Else if
                 //else if (FirstLetterFirstName() == FisrtCharLastName())
                 //{
                 //    Students[spot] = newStudent;
@@ -219,7 +269,17 @@ namespace SummerSchool
             {
                 Console.WriteLine(i + 1 + ". " + Students[i] + " (£" + StudentFees[i] + ")");
             }
+            Console.WriteLine();
+            Console.WriteLine("Total £" + FeesTotal());
         } 
+        static double FeesTotal()//Gets Total
+        {
+            double totalFirst5 = StudentFees[0] + StudentFees[1] + StudentFees[2] + StudentFees[3] + StudentFees[4];
+            double totalMid5 = StudentFees[5] + StudentFees[6] + StudentFees[7] + StudentFees[8] + StudentFees[9];
+            double totalLast5 = StudentFees[10] + StudentFees[11] + StudentFees[12] + StudentFees[13] + StudentFees[14];
+            double total = totalFirst5 + totalMid5 + totalLast5;
+            return total;
+        }
         static void Main(string[] args)
         {
             string Choice = "0";
@@ -238,6 +298,8 @@ namespace SummerSchool
                 {
                     PrintStudentList();
                 }
+          
+        //Invalid menu choice
                 else if (!(Choice == "1" || Choice == "2" || Choice == "3" || Choice == "4"))
                 {
                     Console.WriteLine("\n*** Invalid Choice ***\n");
