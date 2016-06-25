@@ -7,7 +7,6 @@ namespace SummerSchool
 {
     class Program
     {
-
         static double[] StudentFees = new double[15];
         static string[] Students = new string[15];
         static int GetNextAvailableSpot() // finds next available spot in student array
@@ -78,7 +77,6 @@ namespace SummerSchool
                 Console.WriteLine("Please enter the name of the student you want to enroll\n");
                 string newStudent = Console.ReadLine();
                 string[] splitNames = newStudent.Split(' ');
-
                 string firstName = splitNames[0];
                 string lastName = splitNames[splitNames.Length - 1];
 
@@ -90,15 +88,15 @@ namespace SummerSchool
                     Console.WriteLine("Students with the last name Malfoy are not to be admitted\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
-          //Checks for Last name Potter
+                //Checks for Last name Potter
                 else if (newStudent.Contains("Potter"))
                 {
                     Students[spot] = newStudent;
-                    StudentFees[spot] =  fee*0.5; //CalculateEnrollmentCost(newStudent);
-                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + (fee*0.5));
+                    StudentFees[spot] = fee * 0.5; //CalculateEnrollmentCost(newStudent);
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + (fee * 0.5));
                     Console.WriteLine("\nPress any key to get back to the Main Menu");
                 }
-         //Starts checking for Tom, Riddle, Voldemort and displaying Red Alert message
+                //Starts checking for Tom, Riddle, Voldemort and displaying Red Alert message
                 else if (lastName.ToLower() == "tom" || firstName.ToLower() == "tom")
                 {
                     Students[spot] = newStudent;
@@ -120,13 +118,13 @@ namespace SummerSchool
                     Console.WriteLine("RED ALERT!!! HE WHO MUST NOT BE NAMED!!!\n");
                     Console.WriteLine("Press any key to get back to the Main Menu");
                 }
-          //Checks for Longbottom discount if less than 10 students are enrolled
+                //Checks for Longbottom discount if less than 10 students are enrolled
                 else if ((newStudent.ToLower()).Contains("longbottom"))
                 {
                     if (StudentCount() < 10)
                     {
                         Students[spot] = newStudent;
-                        StudentFees[spot] = fee *0;
+                        StudentFees[spot] = fee * 0;
                         Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + (fee * 0));
                         Console.WriteLine("Press any key to get back to the Main Menu");
                     }
@@ -138,13 +136,13 @@ namespace SummerSchool
                         Console.WriteLine("Press any key to get back to the Main Menu");
                     }
 
-         // Starts checking for students with same last names as English National Quidditch Team
+                    // Starts checking for students with same last names as English National Quidditch Team
                 }
                 else if (newStudent.Contains("Frisby"))
                 {
                     Students[spot] = newStudent;
                     StudentFees[spot] = fee * 0.7;
-                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee*0.7);
+                    Console.WriteLine(Students[spot] + " is now enrolled and will need to pay £" + fee * 0.7);
                     Console.WriteLine("\nPress any key to get back to the Main Menu");
                 }
                 else if (newStudent.Contains("Choudry"))
@@ -217,8 +215,8 @@ namespace SummerSchool
         {
             if (StudentCount() > 0)
             {
-                Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll");
                 PrintStudentList();
+                Console.WriteLine("\nPlease enter the number that corresponds to the student you want to unenroll\n");
                 int studentNumber = Convert.ToInt32(Console.ReadLine());
                 studentNumber = studentNumber - 1;
                 Console.WriteLine(Students[studentNumber] + " has been unenrolled");
@@ -300,7 +298,7 @@ namespace SummerSchool
             Console.BackgroundColor = ConsoleColor.Red;
             Console.WriteLine("Total: £" + FeesTotal());
             Console.ResetColor();
-            Console.WriteLine("\nPress any key to get back to the Main Menu");
+           // Console.WriteLine("\nPress any key to get back to the Main Menu");
         }
         static double FeesTotal()//Gets Total
         {
